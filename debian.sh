@@ -21,7 +21,7 @@ function BackToMenu () {
 }
 
 function UpdateUpgrade () {
-  sudo apt update -y && sudo apt upgrde -y;
+  sudo apt update -y && sudo apt upgrade -y;
 }
 
 function InstallGit () {
