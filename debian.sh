@@ -5,10 +5,10 @@ group=$(groups | grep -o 'sudo');
 #Desenhar menus
 
 DrawMenu2 () {
-  echo "Menu"
-  echo "1) Customização Pessoal"
-  echo "2) Instalar individualmente cada dependência"
-  echo "3) Atualizar dependências já instaladas"
+  echo -e '\033[01;40m MENU \033[00;37m'
+  echo -e '\033[01;33m 1) Instalar customização pessoal \033[00;37m'
+  echo -e '\033[01;33m 2) Instalar individualmente cada dependência  \033[00;37m'
+  echo -e '\033[01;33m 3) Atualizar dependências já instaladas \033[00;37m'
   echo -e '\033[05;40m Pressione q para sair \033[00;37m'
 }
 
@@ -102,10 +102,10 @@ do
     echo -e '\n\e[31;1m Pacote SUDO não encontrado. Escolha das opções para instalação\n \e[0m';
   fi
 
-  read -p "Escolha uma das opções: " opcao
+  read opcao
 
   case $opcao in
-    0)
+    1)
       #Atualizando sistema
       UpdateUpgrade
       #Instalando git 
@@ -122,11 +122,15 @@ do
       InstallLunarVim
       BackToMenu;;
 
-    1)
-      BackToMenu;;
     2)
       BackToMenu;;
     3)
+      BackToMenu;;
+    q|Q) 
+      exit;;
+    *)
+      clear;
+      BackToMenu;;
 
   esac
 done  
