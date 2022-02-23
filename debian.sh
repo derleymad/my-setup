@@ -34,6 +34,18 @@ function InstallFish () {
   sudo chsh -s `which fish`
 }
 
+function InstallZSH () {
+sudo apt install zsh -y;
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+sed -i 's/robbyrussell/half-life/' ~/.zshrc
+sed -i 's/plugins=(git)/plugins=(git zsh-autosuggestions zsh-syntax-highlighting)/' ~/.zshrc
+
+
+
+}
+
 function InstallASDF () {
   if [ ! -d ~/.asdf ];
   then 
@@ -93,6 +105,24 @@ function InstallLunarVim () {
   fi
 }
 
+function getGitHubPass () {
+  echo -e '\n \033[00;35m Instalando SSH-Keys to GitHub \033[00;37m \n '
+
+  if [ -d `which git` ]; then
+    git config --global user.name "derleymad"
+    git config --global user.email filho.wanderley@hotmail.com
+  fi
+
+  if [ -d `which ssh` ]; then
+    ssh-keygen -t ed25519 -C "filho.wanderley@hotmail.com"
+    sudo apt install xclip -y
+    cat ~/.ssh/id_ed25519.pub | xclip -selection clipboard
+    echo -e '\n \033[00;35m Chave copiada para o clipboard \033[00;37m \n '
+    /usr/bin/firefox --new-window  https://github.com/settings/ssh/new
+  fi
+  
+}
+
 while [ "$voltar" != "n" ]
 do
   DrawMenu2 
@@ -110,8 +140,8 @@ do
       UpdateUpgrade
       #Instalando git 
       InstallGit
-      #Instalando fish
-      InstallFish
+      #Instalando ZSH e ativando Plugins
+
       #Instalando ASDF
       InstallASDF
       #Instalando Linguagens para ASDF
@@ -120,11 +150,15 @@ do
       InstallNeoVim
       #Instalando LunarVim
       InstallLunarVim
+      #Instalando Chaves SSH Para GitHub
+      getGitHubPass
+
       BackToMenu;;
 
     2)
       BackToMenu;;
     3)
+
       BackToMenu;;
     q|Q) 
       exit;;
