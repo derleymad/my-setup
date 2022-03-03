@@ -64,7 +64,6 @@ function InstallASDF () {
 function InstallLanguagesToASDF () {
   if [ -d ~/.asdf ];
   then
-  if [    ]
     echo -e '\n \033[00;35m Instalando nodejs\033[00;37m \n'
     sudo apt-get install dirmngr gpg curl gawk -y
     ~/.asdf/bin/asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git   
