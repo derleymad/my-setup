@@ -139,7 +139,7 @@ function InstallVim() {
     cd /tmp/  
     git clone --branch "v1.2" git@github.com:derleymad/post-installation-debian.git
     cd post-installation-debian
-    cp -r dotfiles/* ~
+    cp -r dotfiles/. ~ 
 }
 
 while [ "$voltar" != "n" ]
@@ -167,6 +167,7 @@ InstallVim
 BackToMenu;;
 
 2)
+InstallVim
 BackToMenu;;
 3)
 
