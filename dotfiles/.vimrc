@@ -13,6 +13,9 @@ set cursorline
 "Diminui o tamanho o tab
 set softtabstop=2 expandtab shiftwidth=2
 
+"Define a indencação atomática
+filetype indent on
+
 "Define o caractere indentado pelo plugin
 let g:indentLine_char = '┊'  
 
@@ -27,3 +30,6 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'
 
 nnoremap <silent> <S-l> :bn!<CR>
 nnoremap <silent> <S-h> :bp!<CR>
+
+"Tira o ex mode do vim
+map Q <Nop>
