@@ -17,6 +17,7 @@ username='derleymad'
 
 #Funções
 DrawMenu2 () {
+  clear
   echo -e '\033[01;40m MENU \033[00;37m'
   echo -e '\033[01;33m 1) Instalar customização pessoal \033[00;37m'
   echo -e '\033[01;33m 2) Instalar individualmente cada dependência  \033[00;37m'
