@@ -3,6 +3,7 @@
 #Sudo grupo
 group=$(groups | grep -o 'sudo');
 
+
 #Colors
 Red='\033[0;31m'    # Red
 URed='\033[4;31m'   # Red underline
@@ -177,7 +178,11 @@ function InstallVim() {
     git clone https://github.com/vim-airline/vim-airline && \
     git clone https://github.com/vim-airline/vim-airline-themes && \
     git clone https://github.com/tpope/vim-fugitive && \
-    git clone https://github.com/shime/vim-livedown  
+    git clone https://github.com/shime/vim-livedown && \
+    git clone --branch release https://github.com/neoclide/coc.nvim.git --depth=1
+  
+  #Instalando coc(s) específicos
+  vim -c 'CocInstall -sync coc-sh coc-python coc-lua coc-tsserver coc-json coc-html coc-css|q|q'
 
   if [ -d /tmp/post-installation-debian ]; then
     rm -rf /tmp/post-installation-debian
