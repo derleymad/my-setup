@@ -146,8 +146,8 @@ function InstallLunarVim () {
 #Função auxiliar para InstallVim
 function VimAux () {
   cd /tmp/
-  git clone --branch v1.2 https://github.com/derleymad/post-installation-debian 
-  cd post-installation-debian/
+  git clone https://github.com/derleymad/my-setup 
+  cd my-setup/
 
   if [ -f ~/.vimrc ]; then
     echo -e "${Green}\nFazendo backup e instalando novos arquivos${Off}"
@@ -184,9 +184,9 @@ function InstallVim() {
   #Instalando coc(s) específicos
   vim -c 'CocInstall -sync coc-sh coc-python coc-lua coc-tsserver coc-json coc-html coc-css|q|q'
 
-  if [ -d /tmp/post-installation-debian ]; then
-    rm -rf /tmp/post-installation-debian
-    VimAux
+  if [ -d /tmp/my-setup ]; then
+    rm -rf /tmp/my-setup
+    VimAu
   else
     VimAux
   fi 
