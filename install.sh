@@ -186,7 +186,7 @@ function InstallVim() {
 
   if [ -d /tmp/my-setup ]; then
     rm -rf /tmp/my-setup
-    VimAu
+    VimAux
   else
     VimAux
   fi 
