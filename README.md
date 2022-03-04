@@ -10,15 +10,20 @@ __Programas que o Script Instala:__
 - Instala Vim e plugins  
 - ASDF e plugins nodejs, rust, ruby, lua;
 
-## __Como Instalar:__
+## Installation __
+
 Via wget:
-```bash -c "$(wget https://raw.githubusercontent.com/derleymad/my-setup/main/debian.sh -O -)"```
+```bash
+bash -c "$(wget https://raw.githubusercontent.com/derleymad/my-setup/main/debian.sh -O -)"
+```
+
 
 Via git clone:
 ```bash
 git clone https://github.com/derleymad/my-setup
 cd my-setup
-bash install.sh```
+bash install.sh
+```
 
 ## License
 [Here]
