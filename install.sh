@@ -3,6 +3,8 @@
 #Sudo grupo
 group=$(groups | grep -o 'sudo');
 
+#Diretório dos plugins
+DirPlugins='~/.vim/pack/wm-plugins/start'
 
 #Colors
 Red='\033[0;31m'    # Red
@@ -182,12 +184,43 @@ function InstallLunarVim () {
   fi
 }
 
+#Função auxiliar para instalar plugins no vim
+function VimPlug () {
+  rm -rf ${DirPlugins} 
+  mkdir -p ${DirPlugins} && cd ${DirPlugins}
+  git clone https://github.com/rafi/awesome-vim-colorschemes.git && \
+    git clone https://github.com/mattn/emmet-vim && \
+    git clone https://github.com/Yggdroot/indentLine && \
+    git clone https://github.com/preservim/nerdtree && \
+    git clone https://github.com/vim-airline/vim-airline && \
+    git clone https://github.com/vim-airline/vim-airline-themes && \
+    git clone https://github.com/tpope/vim-fugitive && \
+    git clone https://github.com/shime/vim-livedown && \
+    git clone https://github.com/christoomey/vim-tmux-navigator && \
+    git clone --branch release https://github.com/neoclide/coc.nvim.git --depth=1 
+      vim -c 'CocInstall -sync coc-sh coc-python coc-lua coc-tsserver coc-json coc-html coc-css|q|q'
+    }
+
+function teste () {
+    if [ -d ${DirPlugins} ]; then
+      rm -rf ${DirPlugins}
+    fi
+    mkdir -p ${DirPlugins}  && cd ${DirPlugins} 
+
+    while read line; do
+      git clone $line
+      #lembrar de mudar a pasta sera que tem q ser online por wget:
+    done < plugins.txt
+  } 
+
+
 #Função auxiliar para InstallVim
 function VimAux () {
   if [ $1 = false ]; then
     echo "${Red}\nDesinstalando os dotfiles do vim${Off}"
     rm -rf ~/.vim*
   else
+    rm -rf /tmp/my-setup
     cd /tmp/
     git clone https://github.com/derleymad/my-setup 
     cd my-setup/
@@ -195,10 +228,11 @@ function VimAux () {
     if [ -f ~/.vimrc ]; then
       echo -e "${Green}\nFazendo backup e instalando novos arquivos${Off}"
       mv -f ~/.vimrc ~/.vimrc.old
+      cp -r dotfiles/. ~
     else
       cp -r dotfiles/. ~
     fi
-      fi
+  fi
 }
 
 function InstallVim() {
@@ -211,26 +245,13 @@ function InstallVim() {
   else
     echo -e "${Green}\nInstalando Vim e os plugins${Off}"
     sudo apt install vim -y
-    rm -rf ~/.vim/pack/test/start
-    #Criando pasta e instalando plugins
-    mkdir -p ~/.vim/pack/test/start && cd ~/.vim/pack/test/start
-    git clone https://github.com/rafi/awesome-vim-colorschemes.git && \
-      git clone https://github.com/mattn/emmet-vim && \
-      git clone https://github.com/Yggdroot/indentLine && \
-      git clone https://github.com/preservim/nerdtree && \
-      git clone https://github.com/vim-airline/vim-airline && \
-      git clone https://github.com/vim-airline/vim-airline-themes && \
-      git clone https://github.com/tpope/vim-fugitive && \
-      git clone https://github.com/shime/vim-livedown && \
-      git clone --branch release https://github.com/neoclide/coc.nvim.git --depth=1
-  #Instalando coc(s) específicos
-  vim -c 'CocInstall -sync coc-sh coc-python coc-lua coc-tsserver coc-json coc-html coc-css|q|q'
-  if [ -d /tmp/my-setup ]; then
-    rm -rf /tmp/my-setup
-    VimAux "true"
-  else
-    VimAux "True"
-  fi 
+    VimPlug #Instala plugins para o Vim
+    if [ -d /tmp/my-setup ]; then
+      rm -rf /tmp/my-setup
+      VimAux "true"
+    else
+      VimAux "True"
+    fi 
   fi
 }
 
@@ -240,12 +261,14 @@ function TmuxAux () {
     sudo rm -rf /tmp/*
     sudo rm -rf ~/.tmux*
   else
+    rm -rf /tmp/my-setup
     cd /tmp/
     git clone https://github.com/derleymad/my-setup 
     cd my-setup/
-    if [ -f ~/.tmux.config ]; then 
+    if [ -f ~/.tmux.conf ]; then 
       echo -e "${Red}\nFazendo backup e instalando arquivos novos${Off}"
-      mv -f ~/.tmux.config ~/.tmux.config.old
+      mv -f ~/.tmux.conf ~/.tmux.conf.old
+      echo "era pra ter movido"
       cp -r dotfiles/. ~ 
     else
       cp -r dotfiles/. ~ 
@@ -260,6 +283,7 @@ function InstallTmux () {
     TmuxAux "false"
   else
     sudo apt install tmux -y;
+    TmuxAux "true"
   fi
 }
 
@@ -279,14 +303,15 @@ while [ "$voltar" != "n" ]; do
 
 #Instalação Pessoal
 UpdateUpgrade
-InstallOMB
-InstallGit
-InstallASDF
-InstallVim
+InstallOMB "true"
+InstallGit "true"
+InstallASDF "true" 
+InstallTmux "true"
+InstallVim "true"
 BackToMenu;;
 
 2)
-  InstallVim
+  teste
   BackToMenu;;
 
 3)

@@ -1,0 +1,10 @@
+--branch release https://github.com/neoclide/coc.nvim.git --depth=1
+https://github.com/rafi/awesome-vim-colorschemes.git
+https://github.com/mattn/emmet-vim
+https://github.com/Yggdroot/indentLine
+https://github.com/preservim/nerdtree
+https://github.com/vim-airline/vim-airline
+https://github.com/vim-airline/vim-airline-themes
+https://github.com/tpope/vim-fugitive
+https://github.com/shime/vim-livedown
+https://github.com/christoomey/vim-tmux-navigator
