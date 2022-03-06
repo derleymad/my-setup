@@ -254,11 +254,7 @@ function InstallVim() {
     fi 
   fi
 }
- function TmuxAux () {
-   if [ $2]
- 
- 
- } 
+
 function TmuxAux () {
   if [ $1 = false ]; then
     echo "${Red}\nDesistalando dotfiles do tmux${Off}"
