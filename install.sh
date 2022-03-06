@@ -254,9 +254,13 @@ function InstallVim() {
     fi 
   fi
 }
-
+ function TmuxAux () {
+   if [ $2]
+ 
+ 
+ } 
 function TmuxAux () {
-  if [ 1$ = false ]; then
+  if [ $1 = false ]; then
     echo "${Red}\nDesistalando dotfiles do tmux${Off}"
     sudo rm -rf /tmp/*
     sudo rm -rf ~/.tmux*
@@ -268,7 +272,6 @@ function TmuxAux () {
     if [ -f ~/.tmux.conf ]; then 
       echo -e "${Red}\nFazendo backup e instalando arquivos novos${Off}"
       mv -f ~/.tmux.conf ~/.tmux.conf.old
-      echo "era pra ter movido"
       cp -r dotfiles/. ~ 
     else
       cp -r dotfiles/. ~ 
@@ -277,7 +280,7 @@ function TmuxAux () {
 } 
 
 function InstallTmux () {
-  if [ 1$ = false ]; then
+  if [ $1 = false ]; then
     echo "${Red}\nDesistalanddo Tmux${Off}" 
     sudo apt-get purge --auto-remove tmux -y
     TmuxAux "false"
