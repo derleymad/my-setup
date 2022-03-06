@@ -186,8 +186,8 @@ function InstallLunarVim () {
 
 #Função auxiliar para instalar plugins no vim
 function VimPlug () {
-  rm -rf ${DirPlugins} 
-  mkdir -p ${DirPlugins} && cd ${DirPlugins}
+  rm -rf ~/.vim/pack/wm-plugins/start 
+  mkdir -p ~/.vim/pack/wm-plugins/start && cd ~/.vim/pack/wm-plugins/start  
   git clone https://github.com/rafi/awesome-vim-colorschemes.git && \
     git clone https://github.com/mattn/emmet-vim && \
     git clone https://github.com/Yggdroot/indentLine && \
