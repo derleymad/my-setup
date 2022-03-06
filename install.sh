@@ -37,9 +37,24 @@ function AutoRemove () {
   sudo apt autoremove -y
 }
 
+function Loading () {
+  PID=$!
+  i=1
+  sp="/-\|"
+  echo -n ' '
+  while [ -d /proc/$PID ]
+  do
+    printf "\b${sp:i++%${#sp}:1}"
+    sleep 0.1
+  done
+  echo "Pronto [X]"
+} 
+
 function UpdateUpgrade () {
   echo -e "${Green}\nAtualizando sistema${Off}"
-  sudo apt update -y && sudo apt upgrade -y;
+  sudo apt-get update -y 1>/dev/null & Loading  
+  echo -e "${Green}\nFazendo upgrade no sistema${Off}"
+  sudo apt-get upgrade -y 1>/dev/null & Loading 
 }
 
 #Função auxiliar para InstallGit
@@ -201,7 +216,7 @@ function VimPlug () {
       vim -c 'CocInstall -sync coc-sh coc-python coc-lua coc-tsserver coc-json coc-html coc-css|q|q'
     }
 
-function teste () {
+  function teste () {
     if [ -d ${DirPlugins} ]; then
       rm -rf ${DirPlugins}
     fi
@@ -310,7 +325,7 @@ InstallVim "true"
 BackToMenu;;
 
 2)
-  teste
+  UpdateUpgrade
   BackToMenu;;
 
 3)
