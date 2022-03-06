@@ -138,18 +138,10 @@ function InstallLanguagesToASDF () {
     echo -e "${Red}\nDesinstalando linguagens${Off}" 
   else
     echo -e "${Green}\nInstalando NodeJS via ASDF${Off}"
-    sudo apt-get install dirmngr gpg curl gawk -y
-    asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git   
-    asdf install nodejs latest
-    asdf global nodejs latest
-    #Instalando Rust via ASDF
-    echo -e "${Green}\nInstalando Rust via ASDF${Off}"
-    asdf plugin-add rust https://github.com/code-lever/asdf-rust.git
-    asdf install rust latest
-    asdf global rust latest
-    #Atualizando plugins
-    echo -e "${Green}\nAtualizando Plugins do ASDF${Off}"
-    asdf plugin update --all
+    sudo apt-get install dirmngr gpg curl gawk -y 1>/dev/null & Loading
+    ~/.asdf/bin/asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git   
+    ~/.asdf/bin/asdf install nodejs latest
+    ~/.asdf/bin/asdf global nodejs latest
   fi
 }
 
@@ -162,14 +154,13 @@ function InstallASDF () {
     then 
       echo -e "${Green}\nInstalando ASDF${Off}"
       git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.8.1 1>/dev/null & Loading
-      echo ". $HOME/.asdf/asdf.sh" >> ~/.bashrc"
-      echo ". $HOME/.asdf/completions/asdf.bash" >> ~/.bashrc"
-      source ~/.bashrc
-      # clear
+      echo ". $HOME/.asdf/asdf.sh" >> ~/.bashrc
+      echo ". $HOME/.asdf/completions/asdf.bash" >> ~/.bashrc
+      InstallLanguagesToASDF "true"
     else 
-      echo -e "${Green}\nASDF já foi instalado${Off}"
+      echo -e "${Green}\nASDF já foi instalado, atualizando linguagens e removendo erros${Off}"
+      InstallLanguagesToASDF "true"
     fi
-    InstallLanguagesToASDF "true"
   fi 
 }
 
@@ -204,7 +195,7 @@ function InstallLunarVim () {
 
 #Função auxiliar para instalar plugins no vim
 function VimPlug () {
-  rm -rf ~/.vim/pack/wm-plugins/start 
+  rm -rf ~/.vim/pack 
   mkdir -p ~/.vim/pack/wm-plugins/start && cd ~/.vim/pack/wm-plugins/start  
   git clone https://github.com/rafi/awesome-vim-colorschemes.git && \
     git clone https://github.com/mattn/emmet-vim && \
@@ -260,6 +251,7 @@ function InstallVim() {
     sudo apt-get purge --auto-remove vim
     sudo rm -rf ~/.config/coc
     sudo rm -rf ~/.coc
+    VimAux "false"
   else
     echo -e "${Green}\nInstalando Vim e os plugins${Off}"
     sudo apt install vim -y
@@ -268,7 +260,7 @@ function InstallVim() {
       rm -rf /tmp/my-setup
       VimAux "true"
     else
-      VimAux "True"
+      VimAux "true"
     fi 
   fi
 }
@@ -333,6 +325,9 @@ BackToMenu;;
 
 3)
   InstallOMB "false"
+  InstallASDF "false"
+  InstallTmux "false"
+  InstallVim "false"
   BackToMenu;;
 
 
