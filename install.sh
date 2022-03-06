@@ -47,7 +47,7 @@ function Loading () {
     printf "\b${sp:i++%${#sp}:1}"
     sleep 0.1
   done
-  echo "Pronto [X]"
+  echo "Pronto [✓]"
 } 
 
 function UpdateUpgrade () {
@@ -86,8 +86,8 @@ function InstallGit () {
     sudo apt-get purge --auto-remove git -y
   else 
     echo -e "${Green}\nInstalando git${Off}"
-    sudo apt install git -y;
-    getGitHubPass "true"
+    sudo apt-get install git -y 1>/dev/null & Loading 
+    getGitHubPass "true" & Loading
   fi
 }
 
@@ -132,41 +132,44 @@ function InstallOMB () {
 }
 
 #Função auxiliar para InstallASDF
+
 function InstallLanguagesToASDF () {
   if [ $1 = false ]; then
     echo -e "${Red}\nDesinstalando linguagens${Off}" 
   else
     echo -e "${Green}\nInstalando NodeJS via ASDF${Off}"
     sudo apt-get install dirmngr gpg curl gawk -y
-    ~/.asdf/bin/asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git   
-    ~/.asdf/bin/asdf install nodejs latest
-    ~/.asdf/bin/asdf global nodejs latest
+    asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git   
+    asdf install nodejs latest
+    asdf global nodejs latest
     #Instalando Rust via ASDF
     echo -e "${Green}\nInstalando Rust via ASDF${Off}"
-    ~/.asdf/bin/asdf plugin-add rust https://github.com/code-lever/asdf-rust.git
-    ~/.asdf/bin/asdf install rust latest
-    ~/.asdf/bin/asdf global rust latest
+    asdf plugin-add rust https://github.com/code-lever/asdf-rust.git
+    asdf install rust latest
+    asdf global rust latest
     #Atualizando plugins
     echo -e "${Green}\nAtualizando Plugins do ASDF${Off}"
-    ~/.asdf/bin/asdf plugin update --all
+    asdf plugin update --all
   fi
 }
 
 function InstallASDF () {
   if [ $1 = false ]; then 
     echo -e "${Red}\nDesinstalando ASDF${Off}"
+    rm -rf ~/.asdf 1>/dev/null & Loading
   else
     if [ ! -d ~/.asdf ];
     then 
       echo -e "${Green}\nInstalando ASDF${Off}"
-      git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.8.1
-      echo ". $HOME/.asdf/asdf.sh" >> ~/.bashrc
-      echo ". $HOME/.asdf/completions/asdf.bash" >> ~/.bashrc
+      git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.8.1 1>/dev/null & Loading
+      echo ". $HOME/.asdf/asdf.sh" >> ~/.bashrc"
+      echo ". $HOME/.asdf/completions/asdf.bash" >> ~/.bashrc"
+      source ~/.bashrc
       # clear
     else 
       echo -e "${Green}\nASDF já foi instalado${Off}"
     fi
-    InstallLanguagesToASDF 
+    InstallLanguagesToASDF "true"
   fi 
 }
 
