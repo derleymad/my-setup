@@ -12,9 +12,14 @@ __Programas que o Script Instala:__
 
 ## Installation
 
-Via wget:
+Via wget for linux:
 ```bash
 bash -c "$(wget https://raw.githubusercontent.com/derleymad/my-setup/main/install.sh -O -)"
+```
+
+Via powershell for windows:
+```powershell
+powershell -Command Invoke-WebRequest -Uri https://raw.githubusercontent.com/derleymad/my-setup/main/install-win.bat -OutFile install-win.bat; & ".\install-win.bat"
 ```
 
 
@@ -22,7 +27,7 @@ Via git clone:
 ```bash
 git clone https://github.com/derleymad/my-setup
 cd my-setup
-bash install.sh
+install.sh
 ```
 
 
