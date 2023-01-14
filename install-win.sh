@@ -31,7 +31,7 @@ FOR %%A IN (wget foxitreader googlechrome firefox jre8 vlc winrar 7zip gsudo and
 echo ------------------------- CRIANDO BAIXA E BAIXANDO CONFIGURACOES ----------------------------
 mkdir "C:\MyConfig"
 cd "C:\MyConfig"
-wget https://github.com/derleymad/win-power-ufca/raw/main/imagens/changeuser.bat
+wget -O teste.zip https://github.com/derleymad/my-setup/raw/main/androidstudiosettings/settings.zip
 
 echo ------------------------ INSTALANDO WINDOWS TERMINAL -----------------------
 sudo winget install -e --id Microsoft.WindowsTerminal
