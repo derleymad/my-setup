@@ -38,8 +38,8 @@ cd "C:\MyConfig"
 wget -O teste.zip https://github.com/derleymad/my-setup/raw/main/androidstudiosettings/settings.zip
 echo "scrcpy --max-size 1024 --bit-rate 15M --max-fps 60 --render-driver=opengl" > scrppy.txt
 
-Set-ExecutionPolicy RemoteSigned
-echo "C:\Users\filho\AppData\Local\Programs\oh-my-posh\bin\oh-my-posh.exe init pwsh --config 'C:\Users\filho\AppData\Local\Programs\oh-my-posh\themes\half-life.omp.json' | Invoke-Expression" > $PROFILE
+powershell Set-ExecutionPolicy RemoteSigned
+echo "oh-my-posh.exe init pwsh --config 'C:\Program Files (x86)\oh-my-posh\themes\half-life.omp.json' | Invoke-Expression" > $PROFILE
 echo cls >> $PROFILE
 
 echo ------------------------ INSTALANDO SSHSERVER -------------------------
