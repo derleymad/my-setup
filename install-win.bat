@@ -26,12 +26,13 @@ DEL "%RegBackup%\HKCC.reg"
 echo ------------------------ INSTALANDO PROGRAMAS ------------------------ 
 
 @"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "[System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
-FOR %%A IN (wget foxitreader googlechrome firefox jre8 vlc winrar 7zip gsudo androidstudio) DO CHOCO INSTALL %%A -Y
+FOR %%A IN (wget foxitreader googlechrome firefox jre8 vlc winrar 7zip gsudo androidstudio bitwarden driverbooster steam discord scrcpy) DO CHOCO INSTALL %%A -Y
 
 echo ------------------------- CRIANDO BAIXA E BAIXANDO CONFIGURACOES ----------------------------
 mkdir "C:\MyConfig"
 cd "C:\MyConfig"
 wget -O teste.zip https://github.com/derleymad/my-setup/raw/main/androidstudiosettings/settings.zip
+echo "scrcpy --max-size 1024 --bit-rate 15M --max-fps 60 --render-driver=opengl" > scrppy.txt
 
 echo ------------------------ INSTALANDO WINDOWS TERMINAL -----------------------
 sudo winget install -e --id Microsoft.WindowsTerminal
