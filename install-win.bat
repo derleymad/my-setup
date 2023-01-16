@@ -26,7 +26,11 @@ DEL "%RegBackup%\HKCC.reg"
 echo ------------------------ INSTALANDO PROGRAMAS ------------------------ 
 
 @"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "[System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
-FOR %%A IN (wget foxitreader googlechrome firefox jre8 vlc winrar 7zip gsudo androidstudio bitwarden driverbooster steam discord scrcpy) DO CHOCO INSTALL %%A -Y
+FOR %%A IN (wget foxitreader googlechrome firefox jre8 vlc winrar 7zip gsudo androidstudio bitwarden driverbooster steam discord scrcpy git powertoys oh-my-posh swiftforwindows) DO CHOCO INSTALL %%A -Y
+choco install microsoft-windows-terminal --pre 
+
+echo ---- iniciando chave do github --------
+start cmd /k ssh-keygen -t ed25519 -C "wanderleymbf@gmail.com"
 
 echo ------------------------- CRIANDO BAIXA E BAIXANDO CONFIGURACOES ----------------------------
 mkdir "C:\MyConfig"
@@ -34,17 +38,9 @@ cd "C:\MyConfig"
 wget -O teste.zip https://github.com/derleymad/my-setup/raw/main/androidstudiosettings/settings.zip
 echo "scrcpy --max-size 1024 --bit-rate 15M --max-fps 60 --render-driver=opengl" > scrppy.txt
 
-echo ------------------------ INSTALANDO WINDOWS TERMINAL -----------------------
-sudo winget install -e --id Microsoft.WindowsTerminal
-sudo winget install JanDeDobbeleer.OhMyPosh -s winget
-sudo Set-ExecutionPolicy RemoteSigned
+Set-ExecutionPolicy RemoteSigned
 echo "C:\Users\filho\AppData\Local\Programs\oh-my-posh\bin\oh-my-posh.exe init pwsh --config 'C:\Users\filho\AppData\Local\Programs\oh-my-posh\themes\half-life.omp.json' | Invoke-Expression" > $PROFILE
 echo cls >> $PROFILE
-
-echo ----------------- INSTALANDO SWIFT LANGUAGE ------------------------------
-winget install Swift.Toolchain
-
-
 
 echo ------------------------ INSTALANDO SSHSERVER -------------------------
 
