@@ -14,8 +14,8 @@ UGreen='\033[4;32m' # Green underline
 Off='\033[0m'       # Text Reset
 
 #Informação pessoal para o git
-email='filho.wanderley@hotmail.com'
-username='derleymad'
+#email=''
+#username=''
 
 #Funções
 DrawMenu2 () {
@@ -301,6 +301,8 @@ while [ "$voltar" != "n" ]; do
     1)
 
 #Instalação Pessoal
+read email
+read username
 UpdateUpgrade
 InstallOMB "true"
 InstallGit "true"
